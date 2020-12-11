@@ -1,0 +1,29 @@
+name: "Use Doctum"
+author: williamdes
+description: "Use Doctum without having to install it"
+inputs:
+    config-file:
+        description: "The configuration file"
+        required: true
+    method:
+        description: "parse, render or update"
+        required: true
+    cli-args:
+        description: "Command line arguments"
+        default: '--output-format=github --no-ansi --no-progress'
+        required: false
+    docker-version:
+        description: "The docker image to use"
+        default: 'latest'
+        required: false
+
+branding:
+    icon: "book"
+    color: blue
+runs:
+    using: "docker"
+    image: "docker://botsudo/action-doctum:${{ inputs.docker-version }}"
+    args:
+        - "${{ inputs.config-file }}"
+        - "${{ inputs.method }}"
+        - "${{ inputs.cli-args }}"

@@ -1,0 +1,13 @@
+name: build doctum docs
+on: [push]
+
+jobs:
+    sync:
+        runs-on: ubuntu-latest
+        steps:
+            - name: build doctum docs
+              uses: sudo-bot/action-doctum@v5
+              with:
+                  config-file: doctum.php
+                  method: "update"
+                  cli-args: "--output-format=github --no-ansi --no-progress"
