@@ -1,6 +1,6 @@
 FROM php:cli-alpine
 
-ARG RELEASE_VERSION=latest
+ARG RELEASE_VERSION=5.2
 
 COPY entrypoint.sh /entrypoint.sh
 

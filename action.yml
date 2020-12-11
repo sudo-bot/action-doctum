@@ -14,7 +14,7 @@ inputs:
         required: false
     docker-version:
         description: "The docker image to use"
-        default: 'latest'
+        default: 'v5'
         required: false
 
 branding:
