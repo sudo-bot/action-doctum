@@ -18,3 +18,11 @@ update-tags:
 	git push origin refs/tags/v5 -f
 	git push origin refs/tags/dev -f
 	git push origin refs/tags/latest -f
+
+update-branches:
+	git checkout 5.x
+	git merge main
+	git checkout -
+	git checkout dev
+	git merge main
+	git checkout -
