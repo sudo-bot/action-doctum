@@ -6,7 +6,7 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: build doctum docs
-              uses: sudo-bot/action-doctum:latest
+              uses: sudo-bot/action-doctum@latest
               with:
                   config-file: doctum.php
                   method: "update"
