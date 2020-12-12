@@ -9,4 +9,4 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v2
             - name: Build action image
-              run: docker build ./docker
+              run: make docker-build
