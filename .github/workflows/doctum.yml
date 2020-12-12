@@ -9,6 +9,6 @@ jobs:
             - name: build doctum docs
               uses: sudo-bot/action-doctum@v5
               with:
-                  config-file: tests/doctum.php
+                  config-file: docker/tests/doctum.php
                   method: "update"
                   cli-args: "--output-format=github --no-ansi --no-progress"

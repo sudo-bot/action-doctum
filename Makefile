@@ -12,5 +12,5 @@ update-tags:
 	git checkout 5.x
 	git tag -s -f -a -m "5.x series" 5.x
 	git checkout -
-	git push origin latest -f
-	git push origin 5.x -f
+	git push origin refs/tags/latest -f
+	git push origin refs/tags/5.x -f
