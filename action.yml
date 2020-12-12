@@ -12,17 +12,13 @@ inputs:
         description: "Command line arguments"
         default: '--output-format=github --no-ansi --no-progress'
         required: false
-    docker-version:
-        description: "The docker image to use"
-        default: 'v5'
-        required: false
 
 branding:
     icon: "book"
     color: blue
 runs:
     using: "docker"
-    image: "docker://botsudo/action-doctum:${{ inputs.docker-version }}"
+    image: "docker://botsudo/action-doctum:v5"
     args:
         - "${{ inputs.config-file }}"
         - "${{ inputs.method }}"
