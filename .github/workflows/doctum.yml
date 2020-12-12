@@ -11,4 +11,4 @@ jobs:
               with:
                   config-file: docker/tests/doctum.php
                   method: "update"
-                  cli-args: "--output-format=github --no-ansi --no-progress"
+                  cli-args: "--output-format=github --no-ansi --no-progress -v"
