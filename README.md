@@ -5,6 +5,7 @@
 ## Example usage
 
 ```yml
+  - uses: actions/checkout@v2
   - name: build doctum docs
     uses: sudo-bot/action-doctum@v5
     with:
