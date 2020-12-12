@@ -20,6 +20,7 @@ runs:
     using: "docker"
     image: "docker://botsudo/action-doctum:v5"
     args:
+        - 5
         - "${{ inputs.config-file }}"
         - "${{ inputs.method }}"
         - "${{ inputs.cli-args }}"
