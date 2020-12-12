@@ -18,9 +18,9 @@ branding:
     color: blue
 runs:
     using: "docker"
-    image: "docker://botsudo/action-doctum:latest"
+    image: "docker://botsudo/action-doctum:dev"
     args:
-        - latest
+        - dev
         - "${{ inputs.config-file }}"
         - "${{ inputs.method }}"
         - "${{ inputs.cli-args }}"

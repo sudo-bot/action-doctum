@@ -1,6 +1,6 @@
 FROM php:cli-alpine
 
-ARG RELEASE_VERSION=latest
+ARG RELEASE_VERSION=dev
 
 # Metadata params
 ARG VCS_REF

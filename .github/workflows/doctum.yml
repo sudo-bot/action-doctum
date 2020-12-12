@@ -7,7 +7,7 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - name: build doctum docs
-              uses: sudo-bot/action-doctum@latest
+              uses: sudo-bot/action-doctum@dev
               with:
                   config-file: docker/tests/doctum.php
                   method: "update"
