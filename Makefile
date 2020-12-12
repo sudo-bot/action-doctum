@@ -10,7 +10,7 @@ update-tags:
 	git tag -s -f -a -m "latest series" latest
 	git checkout -
 	git checkout 5.x
-	git tag -s -f -a -m "5.x series" 5.x
+	git tag -s -f -a -m "5.x series" v5
 	git checkout -
 	git push origin refs/tags/latest -f
-	git push origin refs/tags/5.x -f
+	git push origin refs/tags/v5 -f
