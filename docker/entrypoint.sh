@@ -26,7 +26,7 @@ if [ ! -f /bin/doctum ] || [ ${RELEASE_VERSION} = "dev" ]; then
     cd /bin/
     echo "::debug Checking the file"
     sed -i 's/doctum.phar/doctum/' /bin/doctum.sha256
-    sha256sum --status --check --strict /bin/doctum.sha256
+    sha256sum -s -c -w /bin/doctum.sha256
     cd - > /dev/null
     echo "::endgroup::"
 fi
