@@ -3,7 +3,7 @@ version: "3.3"
 services:
     sut:
         build: .
-        command: "./doctum.php update"
+        command: "5 ./doctum.php update"
         volumes:
           - ./tests:/tests:ro
         working_dir: /tests
