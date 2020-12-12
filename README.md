@@ -12,7 +12,7 @@
         config-file: doctum.php
         # parse, render or update
         method: "update"
-        # You can change them, defaults to '--output-format=github --no-ansi --no-progress' (optional)
+        # (optional) defaults to '--output-format=github --no-ansi --no-progress -v'
         cli-args: "--output-format=github --no-ansi --no-progress"
 ```
 
@@ -26,7 +26,7 @@
         config-file: doctum.php
         # parse, render or update
         method: "update"
-        # You can change them, defaults to '--output-format=github --no-ansi --no-progress' (optional)
+        # (optional) defaults to '--output-format=github --no-ansi --no-progress -v'
         cli-args: "--output-format=github --no-ansi --no-progress"
 ```
 
@@ -40,6 +40,6 @@
         config-file: doctum.php
         # parse, render or update
         method: "update"
-        # You can change them, defaults to '--output-format=github --no-ansi --no-progress' (optional)
+        # (optional) defaults to '--output-format=github --no-ansi --no-progress -v'
         cli-args: "--output-format=github --no-ansi --no-progress"
 ```

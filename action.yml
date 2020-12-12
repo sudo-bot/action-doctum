@@ -10,7 +10,7 @@ inputs:
         required: true
     cli-args:
         description: "Command line arguments"
-        default: '--output-format=github --no-ansi --no-progress'
+        default: '--output-format=github --no-ansi --no-progress -v'
         required: false
 
 branding:
