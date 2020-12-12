@@ -1,4 +1,4 @@
-name: "doctum"
+name: "action-doctum"
 author: williamdes
 description: "Use Doctum without having to install it"
 inputs:
