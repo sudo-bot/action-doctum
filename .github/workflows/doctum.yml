@@ -2,12 +2,12 @@ name: build doctum docs
 on: [push]
 
 jobs:
-    sync:
+    build:
         runs-on: ubuntu-latest
         steps:
             - name: build doctum docs
               uses: sudo-bot/action-doctum@latest
               with:
-                  config-file: doctum.php
+                  config-file: tests/doctum.php
                   method: "update"
                   cli-args: "--output-format=github --no-ansi --no-progress"
