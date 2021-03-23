@@ -31,4 +31,4 @@ if [ ! -f /bin/doctum ] || [ ${RELEASE_VERSION} = "dev" ]; then
     echo "::endgroup::"
 fi
 
-php /bin/doctum ${METHOD} ${CLI_ARGS} ${CONFIG_FILE} 2>&1
+php -d memory_limit=-1 /bin/doctum ${METHOD} ${CLI_ARGS} ${CONFIG_FILE} 2>&1
