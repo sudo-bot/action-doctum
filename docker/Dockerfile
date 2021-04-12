@@ -1,6 +1,6 @@
 FROM alpine:3.13
 
-ARG RELEASE_VERSION=dev
+ARG RELEASE_VERSION=latest
 
 # Metadata params
 ARG VCS_REF

@@ -16,7 +16,7 @@ echo "::debug CONFIG_FILE: ${CONFIG_FILE}"
 echo "::debug METHOD: ${METHOD}"
 echo "::debug CLI_ARGS: ${CLI_ARGS}"
 
-if [ ! -f /bin/doctum ] || [ ${RELEASE_VERSION} = "dev" ]; then
+if [ ! -f /bin/doctum ] || [ "${RELEASE_VERSION}" = "dev" ]; then
     RELEASE_VERSION="${RELEASE_VERSION}" /install.sh
 fi
 
