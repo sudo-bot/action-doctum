@@ -7,31 +7,26 @@ ARG VCS_REF
 ARG BUILD_DATE
 
 COPY entrypoint.sh /entrypoint.sh
+COPY install.sh /install.sh
 
 RUN set -ex; \
     echo 'Installing PHP'; \
     apk add --no-cache --update php8-cli php8-phar git; \
     apk add --no-cache --update --virtual .build-deps curl gnupg; \
+    ln -s /usr/bin/php8 /bin/php; \
     echo 'Adding GPG key'; \
     curl -s -o /tmp/public-key.asc https://williamdes.eu/public-key.asc; \
     gpg --import /tmp/public-key.asc; \
     LC_ALL=C.UTF-8 gpg --keyid-format long --import --with-fingerprint --import-options show-only /tmp/public-key.asc \
         | grep -F "Key fingerprint = C4D9 1FDF CEF6 B4A3 C653  FD78 90A0 EF1B 8251 A889"; \
-    echo "Downloaded release channel: ${RELEASE_VERSION}"; \
-    curl -# -o /bin/doctum.phar.sha256 https://doctum.long-term.support/releases/${RELEASE_VERSION}/doctum.phar.sha256; \
-    curl -# -o /bin/doctum.phar.sha256.asc https://doctum.long-term.support/releases/${RELEASE_VERSION}/doctum.phar.sha256.asc; \
-    curl -# -o /bin/doctum.phar.asc https://doctum.long-term.support/releases/${RELEASE_VERSION}/doctum.phar.asc; \
-    curl -# -o /bin/doctum.phar https://doctum.long-term.support/releases/${RELEASE_VERSION}/doctum.phar; \
-    gpg --verify /bin/doctum.phar.asc /bin/doctum.phar; \
-    gpg --verify /bin/doctum.phar.sha256.asc /bin/doctum.phar.sha256; \
-    cd /bin/ > /dev/null && sha256sum -c -s -w /bin/doctum.phar.sha256 && cd - > /dev/null; \
-    rm /tmp/public-key.asc /bin/doctum.phar.asc /bin/doctum.phar.sha256 /bin/doctum.phar.sha256.asc; \
-    rm -rf /root/.gnupg; \
-    apk del .build-deps; \
-    ln -s /usr/bin/php8 /bin/php; \
-    mv /bin/doctum.phar /bin/doctum; \
-    chmod +x /bin/doctum; \
+    rm /tmp/public-key.asc; \
+    echo 'C4D91FDFCEF6B4A3C653FD7890A0EF1B8251A889:6' | gpg --import-ownertrust; \
+    echo 'Installing Doctum'; \
+    /install.sh; \
+    echo 'Cleanup and tests'; \
+    if [ ${RELEASE_VERSION} != "dev" ]; then apk del .build-deps; fi; \
     /bin/php --version; \
+    git --version; \
     /bin/doctum version --text
 
 # Metadata
