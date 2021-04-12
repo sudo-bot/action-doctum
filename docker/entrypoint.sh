@@ -6,7 +6,18 @@
 
 set -e
 
-RELEASE_VERSION="$1"
+trim() {
+    trimmed="$1"
+
+    # Strip leading space.
+    trimmed="${trimmed## }"
+    # Strip trailing space.
+    trimmed="${trimmed%% }"
+
+    echo "$trimmed"
+}
+
+RELEASE_VERSION="$(trim "$1")"
 CONFIG_FILE="$2"
 METHOD="$3"
 CLI_ARGS="$4"
@@ -16,7 +27,7 @@ echo "::debug CONFIG_FILE: ${CONFIG_FILE}"
 echo "::debug METHOD: ${METHOD}"
 echo "::debug CLI_ARGS: ${CLI_ARGS}"
 
-if [ ! -f /bin/doctum ] || [ ${RELEASE_VERSION} = "dev" ]; then
+if [ ! -f /bin/doctum ] || [ "${RELEASE_VERSION}" = "dev" ]; then
     RELEASE_VERSION="${RELEASE_VERSION}" /install.sh
 fi
 
