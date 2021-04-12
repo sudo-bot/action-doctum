@@ -16,12 +16,11 @@ RUN set -ex; \
     ln -s /usr/bin/php8 /bin/php; \
     echo 'Adding GPG key'; \
     curl -s -o /tmp/public-key.asc https://williamdes.eu/public-key.asc; \
-    gpg --import /tmp/public-key.asc; \
     LC_ALL=C.UTF-8 gpg --keyid-format long --import --with-fingerprint --import-options show-only /tmp/public-key.asc \
         | grep -F "Key fingerprint = C4D9 1FDF CEF6 B4A3 C653  FD78 90A0 EF1B 8251 A889"; \
-    LC_ALL=C.UTF-8 gpg --import /tmp/public-key.asc; \
+    LC_ALL=C.UTF-8 gpg --homedir /doctum/.gnupg --import /tmp/public-key.asc; \
     rm /tmp/public-key.asc; \
-    echo 'C4D91FDFCEF6B4A3C653FD7890A0EF1B8251A889:6' | gpg --import-ownertrust; \
+    echo 'C4D91FDFCEF6B4A3C653FD7890A0EF1B8251A889:6' | gpg --homedir /doctum/.gnupg --import-ownertrust; \
     echo 'Installing Doctum'; \
     /install.sh; \
     echo 'Cleanup and tests'; \

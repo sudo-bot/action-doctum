@@ -9,14 +9,14 @@ downloadFileIntoBin() {
 
 verifyRelease() {
     echo "::debug Checking the release"
-    gpg --verify /bin/doctum.phar.asc /bin/doctum.phar
-    gpg --verify /bin/doctum.phar.sha256.asc /bin/doctum.phar.sha256
+    gpg --homedir /doctum/.gnupg --verify /bin/doctum.phar.asc /bin/doctum.phar
+    gpg --homedir /doctum/.gnupg --verify /bin/doctum.phar.sha256.asc /bin/doctum.phar.sha256
     cd /bin/ > /dev/null && sha256sum -c -s -w /bin/doctum.phar.sha256 && cd - > /dev/null
 }
 
 cleanup() {
     rm /bin/doctum.phar.asc /bin/doctum.phar.sha256 /bin/doctum.phar.sha256.asc
-    rm -rf /root/.gnupg
+    rm -rf /doctum/.gnupg
 }
 
 echo "::group::Downloading Doctum"
