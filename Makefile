@@ -30,4 +30,4 @@ update-branches:
 push-branches:
 	git push origin refs/heads/5.x
 	git push origin refs/heads/dev
-	git push origin refs/heads/latest
+	git push origin refs/heads/main
