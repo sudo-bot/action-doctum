@@ -17,7 +17,7 @@ echo "::debug METHOD: ${METHOD}"
 echo "::debug CLI_ARGS: ${CLI_ARGS}"
 
 if [ ! -f /bin/doctum ] || [ ${RELEASE_VERSION} = "dev" ]; then
-    /install.sh
+    RELEASE_VERSION="${RELEASE_VERSION}" /install.sh
 fi
 
 php -d memory_limit=-1 /bin/doctum ${METHOD} ${CLI_ARGS} ${CONFIG_FILE} 2>&1
