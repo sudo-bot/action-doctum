@@ -2,9 +2,10 @@ version: "3.3"
 
 services:
     sut:
-        build: .
-        args:
-            RELEASE_VERSION: 'dev'
+        build:
+            context: .
+            args:
+                RELEASE_VERSION: 'dev'
         command: "dev ./doctum.php update"
         volumes:
           - ./tests:/tests:ro
