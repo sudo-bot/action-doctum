@@ -26,7 +26,7 @@ RUN set -ex; \
     gpg --verify /bin/doctum.phar.sha256.asc /bin/doctum.phar.sha256; \
     cd /bin/ > /dev/null && sha256sum -c -s -w /bin/doctum.phar.sha256 && cd - > /dev/null; \
     rm /tmp/public-key.asc /bin/doctum.phar.asc /bin/doctum.phar.sha256 /bin/doctum.phar.sha256.asc; \
-    rm -r /root/.gnupg; \
+    rm -rf /root/.gnupg; \
     apk del .build-deps; \
     ln -s /usr/bin/php8 /bin/php; \
     mv /bin/doctum.phar /bin/doctum; \
