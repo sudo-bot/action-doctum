@@ -26,3 +26,8 @@ update-branches:
 	git checkout dev
 	git merge main
 	git checkout -
+
+push-branches:
+	git push origin refs/heads/v5
+	git push origin refs/heads/dev
+	git push origin refs/heads/latest
