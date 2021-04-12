@@ -6,7 +6,18 @@
 
 set -e
 
-RELEASE_VERSION="$1"
+trim() {
+    trimmed="$1"
+
+    # Strip leading space.
+    trimmed="${trimmed## }"
+    # Strip trailing space.
+    trimmed="${trimmed%% }"
+
+    echo "$trimmed"
+}
+
+RELEASE_VERSION="$(trim "$1")"
 CONFIG_FILE="$2"
 METHOD="$3"
 CLI_ARGS="$4"
