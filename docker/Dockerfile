@@ -25,7 +25,7 @@ RUN set -ex; \
     echo 'Installing Doctum'; \
     /install.sh; \
     echo 'Cleanup and tests'; \
-    if [ ${RELEASE_VERSION} != "dev" ]; then apk del .build-deps; fi; \
+    if [ "${RELEASE_VERSION}" != "dev" ]; then apk del .build-deps; fi; \
     /bin/php --version; \
     git --version; \
     /bin/doctum version --text
