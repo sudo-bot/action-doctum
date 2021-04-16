@@ -11,7 +11,7 @@ COPY install.sh /install.sh
 
 RUN set -ex; \
     echo 'Installing PHP'; \
-    apk add --no-cache --update php8-cli php8-phar php8-tokenizer git; \
+    apk add --no-cache --update php8-cli php8-phar php8-tokenizer php8-iconv git; \
     apk add --no-cache --update --virtual .build-deps curl gnupg; \
     ln -s /usr/bin/php8 /bin/php; \
     echo 'Adding GPG key'; \
