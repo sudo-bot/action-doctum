@@ -21,7 +21,7 @@ createUser() {
     if [ "${USER_ID}" != "0" ]; then
         echo "::debug Detected user-id: ${USER_ID}"
         echo "::debug Detected group-id: ${GROUP_ID}"
-        groupadd -g "${GROUP_ID}" doctum
+        addgroup -g "${GROUP_ID}" doctum
         adduser -h "${PWD}" -D -u "${USER_ID}" -G "${GROUP_ID}" -s "${SHELL}" doctum
         echo "::debug User created: $(id doctum)"
         su - doctum
