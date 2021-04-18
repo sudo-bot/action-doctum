@@ -17,6 +17,20 @@ trim() {
     echo "$trimmed"
 }
 
+createUser() {
+    if [ "${USER_ID}" != "0" ]; then
+        echo "::debug Detected user-id: ${USER_ID}"
+        echo "::debug Detected group-id: ${GROUP_ID}"
+        groupadd -g "${GROUP_ID}" doctum
+        adduser -h "${PWD}" -D -u "${USER_ID}" -G "${GROUP_ID}" -s "${SHELL}" doctum
+        echo "::debug User created: $(id doctum)"
+        su - doctum
+        echo "::debug Logged in as $(id -n -u), home: ${PWD}"
+    else
+        echo "::debug The user is root, skipping"
+    fi
+}
+
 RELEASE_VERSION="$(trim "$1")"
 CONFIG_FILE="$2"
 METHOD="$3"
@@ -37,17 +51,14 @@ if [ -z "${USER_ID}" ] && [ -z "${GROUP_ID}" ] && [ -f "${CONFIG_FILE}" ] && [ -
         echo "::debug No user detected, creating one from the config file owner and group"
         USER_ID="$(stat -c "%u" "${CONFIG_FILE}")"
         GROUP_ID="$(stat -c "%g" "${CONFIG_FILE}")"
-        if [ "${USER_ID}" != "0" ]; then
-            echo "::debug Detected user-id: ${USER_ID}"
-            echo "::debug Detected group-id: ${GROUP_ID}"
-            adduser -h "${PWD}" -D -u "${USER_ID}" -G "${GROUP_ID}" -s "${SHELL}" doctum
-            groupadd -g "${GROUP_ID}" doctum
-            echo "::debug User created: $(id doctum)"
-            su - doctum
-            echo "::debug Logged in as $(id -n -u), home: ${PWD}"
-        else
-            echo "::debug The config owner is root, skipping"
-        fi
+        createUser
+    fi
+fi
+# If ENVs are NOT empty and SKIP_OWNER_SWITCH is not defined
+if [ -n "${USER_ID}" ] && [ -n "${GROUP_ID}" ] && [ -z "${SKIP_OWNER_SWITCH}" ]; then
+    # User must be root
+    if [ "$(id -u)" = "0" ]; then
+        createUser
     fi
 fi
 echo "::endgroup::"
