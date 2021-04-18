@@ -22,7 +22,7 @@ createUser() {
         echo "::debug Detected user-id: ${USER_ID}"
         echo "::debug Detected group-id: ${GROUP_ID}"
         addgroup -g "${GROUP_ID}" doctum
-        adduser -h "${PWD}" -D -u "${USER_ID}" -G "${GROUP_ID}" -s "${SHELL}" doctum
+        adduser -h "${PWD}" -D -u "${USER_ID}" -G doctum -s "${SHELL}" doctum
         echo "::debug User created: $(id doctum)"
         su - doctum
         echo "::debug Logged in as $(id -n -u), home: ${PWD}"
