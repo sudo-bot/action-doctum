@@ -12,6 +12,14 @@ inputs:
         description: "Command line arguments"
         default: '--output-format=github --no-ansi --no-progress -v'
         required: false
+    user-id:
+        description: "The user to execute the build, will be auto detected"
+        default: ''
+        required: false
+    group-id:
+        description: "The user to execute the build, will be auto detected"
+        default: ''
+        required: false
 
 branding:
     icon: "book"
@@ -19,6 +27,9 @@ branding:
 runs:
     using: "docker"
     image: "docker://botsudo/action-doctum:latest"
+    env:
+        USER_ID: "${{ inputs.user-id }}"
+        GROUP_ID: "${{ inputs.group-id }}"
     args:
         - latest
         - "${{ inputs.config-file }}"
