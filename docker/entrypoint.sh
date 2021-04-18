@@ -53,9 +53,8 @@ if [ -z "${USER_ID}" ] && [ -z "${GROUP_ID}" ] && [ -f "${CONFIG_FILE}" ] && [ -
         GROUP_ID="$(stat -c "%g" "${CONFIG_FILE}")"
         createUser
     fi
-fi
 # If ENVs are NOT empty and SKIP_OWNER_SWITCH is not defined
-if [ -n "${USER_ID}" ] && [ -n "${GROUP_ID}" ] && [ -z "${SKIP_OWNER_SWITCH}" ]; then
+elif [ -n "${USER_ID}" ] && [ -n "${GROUP_ID}" ] && [ -z "${SKIP_OWNER_SWITCH}" ]; then
     # User must be root
     if [ "$(id -u)" = "0" ]; then
         createUser
