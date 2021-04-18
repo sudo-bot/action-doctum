@@ -31,7 +31,7 @@ echo "::debug USER_ID: ${USER_ID}"
 echo "::debug GROUP_ID: ${GROUP_ID}"
 
 # If ENVs are empty and the config is a file and SKIP_OWNER_SWITCH is not defined
-if [ -n "${USER_ID}" ] && [ -n "${GROUP_ID}" ] && [ -f "${CONFIG_FILE}" ] && [ -z "${SKIP_OWNER_SWITCH}" ]; then
+if [ -z "${USER_ID}" ] && [ -z "${GROUP_ID}" ] && [ -f "${CONFIG_FILE}" ] && [ -z "${SKIP_OWNER_SWITCH}" ]; then
     # User must be root
     if [ "$(id -u)" = "0" ]; then
         echo "::debug No user detected, creating one from the config file owner and group"
