@@ -27,6 +27,7 @@ downloadFileIntoBin doctum.phar.sha256
 downloadFileIntoBin doctum.phar.sha256.asc
 downloadFileIntoBin doctum.phar.asc
 downloadFileIntoBin doctum.phar
+chmod 777 /bin/doctum.phar
 chmod +x /bin/doctum.phar
 
 echo "::endgroup::"

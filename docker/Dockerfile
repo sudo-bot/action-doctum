@@ -22,6 +22,8 @@ RUN set -ex; \
     LC_ALL=C.UTF-8 gpg --homedir /doctum/.gnupg --import /doctum/public-key.asc; \
     rm /doctum/public-key.asc; \
     echo 'C4D91FDFCEF6B4A3C653FD7890A0EF1B8251A889:6' | gpg --homedir /doctum/.gnupg --import-ownertrust; \
+    chmod 777 -R /doctum /entrypoint.sh /install.sh; \
+    gpg --homedir /doctum/.gnupg --list-keys; \
     echo 'Installing Doctum'; \
     /install.sh; \
     echo 'Cleanup and tests'; \
