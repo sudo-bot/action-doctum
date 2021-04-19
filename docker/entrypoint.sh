@@ -24,7 +24,7 @@ createUser() {
         addgroup -g "${GROUP_ID}" doctum
         adduser -h "${PWD}" -D -u "${USER_ID}" -G doctum -s "${SHELL}" doctum
         echo "::debug User created: $(id doctum)"
-        echo "::debug Exec as $(su-exec doctum id -n -u): \"$(id)\", home: ${PWD}"
+        echo "::debug Exec as $(su-exec doctum id -n -u): \"$(su-exec doctum id)\", home: ${PWD}"
     else
         echo "::debug The user is root, skipping"
     fi
@@ -48,6 +48,7 @@ if [ -z "${USER_ID}" ] && [ -z "${GROUP_ID}" ] && [ -f "${CONFIG_FILE}" ] && [ -
     # User must be root
     if [ "$(id -u)" = "0" ]; then
         echo "::debug No user detected, creating one from the config file owner and group"
+        echo "::debug Owner and group of the file: $(stat -c "%u:%g" "${CONFIG_FILE}")"
         USER_ID="$(stat -c "%u" "${CONFIG_FILE}")"
         GROUP_ID="$(stat -c "%g" "${CONFIG_FILE}")"
         createUser
