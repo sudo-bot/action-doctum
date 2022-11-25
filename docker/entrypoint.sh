@@ -23,7 +23,7 @@ createUser() {
         echo "::debug Detected group-id: ${GROUP_ID}"
 
         GROUP_NAME="$(getent group ${GROUP_ID} | cut -d ':' -f1)"
-        if [ "${GROUP_NAME}" != "" ]; then
+        if [ "${GROUP_NAME}" = "" ]; then
             echo "::debug Creating the group"
             GROUP_NAME=doctum
             addgroup -g "${GROUP_ID}" "${GROUP_NAME}"
