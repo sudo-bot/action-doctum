@@ -1,4 +1,4 @@
-FROM alpine:3.13
+FROM alpine:3.16
 
 ARG RELEASE_VERSION=dev
 
@@ -36,12 +36,27 @@ RUN set -ex; \
 # Metadata
 LABEL org.label-schema.vendor="Sudo-Bot" \
     org.label-schema.url="https://github.com/sudo-bot/action-doctum#readme" \
-    org.label-schema.name="Doctum action" \
+    org.label-schema.name="Doctum GitHub action" \
     org.label-schema.description="Doctum action for GitHub actions" \
     org.label-schema.version=${RELEASE_VERSION} \
     org.label-schema.vcs-url="https://github.com/sudo-bot/action-doctum.git" \
     org.label-schema.vcs-ref=${VCS_REF} \
     org.label-schema.build-date=${BUILD_DATE} \
-    org.label-schema.docker.schema-version="1.0"
+    org.label-schema.docker.schema-version="1.0" \
+    \
+    com.docker.extension.publisher-url="https://github.com/wdes" \
+    \
+    org.opencontainers.image.title="Doctum GitHub action" \
+    org.opencontainers.image.description="Doctum action for GitHub actions" \
+    org.opencontainers.image.authors="williamdes@wdes.fr" \
+    org.opencontainers.image.url="https://github.com/sudo-bot/action-doctum#readme" \
+    org.opencontainers.image.documentation="https://github.com/sudo-bot/action-doctum#readme" \
+    org.opencontainers.image.source="https://github.com/sudo-bot/action-doctum" \
+    org.opencontainers.image.vendor="Sudo-Bot" \
+    org.opencontainers.image.licenses="MPL-2.0" \
+    org.opencontainers.image.created=${BUILD_DATE} \
+    org.opencontainers.image.version=${RELEASE_VERSION} \
+    org.opencontainers.image.revision=${VCS_REF} \
+    org.opencontainers.image.ref.name="latest"
 
 ENTRYPOINT ["/entrypoint.sh"]
