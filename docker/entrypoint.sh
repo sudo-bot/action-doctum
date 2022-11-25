@@ -21,8 +21,17 @@ createUser() {
     if [ "${USER_ID}" != "0" ]; then
         echo "::debug Detected user-id: ${USER_ID}"
         echo "::debug Detected group-id: ${GROUP_ID}"
-        addgroup -g "${GROUP_ID}" doctum
-        adduser -h "${PWD}" -D -u "${USER_ID}" -G doctum -s "${SHELL}" doctum
+
+        GROUP_NAME="$(getent group ${GROUP_ID} | cut -d ':' -f1)"
+        if [ "${GROUP_NAME}" != "" ]; then
+            echo "::debug Creating the group"
+            GROUP_NAME=doctum
+            addgroup -g "${GROUP_ID}" "${GROUP_NAME}"
+        else
+            echo "::debug Skipping, group already exists: ${GROUP_NAME}"
+        fi
+
+        adduser -h "${PWD}" -D -u "${USER_ID}" -G "${GROUP_NAME}" -s "${SHELL}" doctum
         echo "::debug User created: $(id doctum)"
         echo "::debug Exec as $(su-exec doctum id -n -u): \"$(su-exec doctum id)\", home: ${PWD}"
     else
