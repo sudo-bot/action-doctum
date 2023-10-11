@@ -1,11 +1,15 @@
 name: build doctum docs
+
+permissions:
+    contents: read
+
 on: [push]
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
+            - uses: actions/checkout@v4
             - name: build doctum docs
               uses: sudo-bot/action-doctum@v5
               with:

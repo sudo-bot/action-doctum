@@ -1,12 +1,43 @@
 name: Build docker image
 
+permissions:
+    contents: read
+
 on: [push]
 
 jobs:
-    build-action:
+    build:
+        name: Build the image
         runs-on: ubuntu-latest
+        strategy:
+            fail-fast: false
+            max-parallel: 2
+            matrix:
+                include:
+                    # All non supported by base image are commented
+                    # This is an example for base image alpine
+                    - { platform: "linux/arm64", platform-tag: "arm64" }
+                    - { platform: "linux/amd64", platform-tag: "amd64" }
+                    - { platform: "linux/arm/v7", platform-tag: "armv7" }
+                    - { platform: "linux/arm/v6", platform-tag: "armv6" }
+                    - { platform: "linux/ppc64le", platform-tag: "ppc64le" }
+                    #- { platform: "linux/riscv64", platform-tag: "riscv64" }
+                    - { platform: "linux/s390x", platform-tag: "s390x" }
+                    - { platform: "linux/386", platform-tag: "386" }
+                    #- { platform: "linux/mips64le", platform-tag: "mips64le" }
+                    #- { platform: "linux/mips64", platform-tag: "mips64" }
+
         steps:
-            - name: Checkout repository
-              uses: actions/checkout@v3
+            - name: Checkout the repository
+              uses: actions/checkout@v4
+            # https://github.com/docker/setup-qemu-action
+            - name: Set up QEMU
+              uses: docker/setup-qemu-action@v2
+            # https://github.com/docker/setup-buildx-action
+            - name: Set up Docker Buildx
+              uses: docker/setup-buildx-action@v2
             - name: Build action image
               run: make docker-build
+              env:
+                  DOCKER_BUILDKIT: 1
+                  PLATFORM: "${{ matrix.platform }}"

@@ -1,0 +1,28 @@
+name: Publish Docker image
+
+permissions:
+    contents: read
+
+on:
+    push:
+        tags:
+            - "v5"
+
+jobs:
+    push_to_registry:
+        name: Push Docker image to Docker hub
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out the repository
+              uses: actions/checkout@v4
+            - name: Login to DockerHub
+              uses: docker/login-action@v2
+              with:
+                  registry: docker.io
+                  username: ${{ secrets.DOCKER_REPOSITORY_LOGIN }}
+                  password: ${{ secrets.DOCKER_REPOSITORY_PASSWORD }}
+            - name: Build action image
+              run: make docker-build
+              env:
+                  IMAGE_TAG: "docker.io/botsudo/action-doctum:v5"
+                  PLATFORM: "linux/amd64,linux/arm64/v8,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6"
