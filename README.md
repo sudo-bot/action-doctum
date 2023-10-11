@@ -2,9 +2,9 @@
 
 |Series|Badges|
 |------|------|
-|5.x|![Build docker image](https://github.com/sudo-bot/action-doctum/workflows/Build%20docker%20image/badge.svg?branch=5.x) ![build doctum docs](https://github.com/sudo-bot/action-doctum/workflows/build%20doctum%20docs/badge.svg?branch=5.x)|
-|dev|![Build docker image](https://github.com/sudo-bot/action-doctum/workflows/Build%20docker%20image/badge.svg?branch=dev) ![build doctum docs](https://github.com/sudo-bot/action-doctum/workflows/build%20doctum%20docs/badge.svg?branch=dev)|
-|latest|![Build docker image](https://github.com/sudo-bot/action-doctum/workflows/Build%20docker%20image/badge.svg?branch=main) ![build doctum docs](https://github.com/sudo-bot/action-doctum/workflows/build%20doctum%20docs/badge.svg?branch=main)|
+|5.x|[![Build docker image](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml/badge.svg?branch=5.x)](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml) [![build doctum docs](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml/badge.svg?branch=5.x)](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml)|
+|dev|[![Build docker image](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml/badge.svg?branch=dev)](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml) [![build doctum docs](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml/badge.svg?branch=dev)](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml)|
+|latest|[![Build docker image](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/sudo-bot/action-doctum/actions/workflows/build.yml) [![build doctum docs](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml/badge.svg?branch=main)](https://github.com/sudo-bot/action-doctum/actions/workflows/doctum.yml)|
 
 
 Go to [Doctum](https://github.com/code-lts/doctum#readme) at GitHub
