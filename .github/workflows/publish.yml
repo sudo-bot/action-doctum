@@ -34,6 +34,14 @@ jobs:
                   PLATFORM: "linux/amd64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6"
                   ACTION: push
 
+            - uses: actions/setup-go@v4
+              with:
+                  go-version: "^1.17"
+            - name: "Install module"
+              run: |
+                  export GO111MODULE=on
+                  go install -tags pkcs11 github.com/theupdateframework/notary/cmd/notary@latest
+                  notary --help
             - name: Sign and push the manifest
               uses: sudo-bot/action-docker-sign@latest
               with:
