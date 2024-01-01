@@ -34,20 +34,12 @@ jobs:
                   PLATFORM: "linux/amd64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6"
                   ACTION: push
 
-            - uses: actions/setup-go@v4
-              with:
-                  go-version: "^1.17"
-            - name: "Install module"
-              run: |
-                  export GO111MODULE=on
-                  go install -tags pkcs11 github.com/theupdateframework/notary/cmd/notary@latest
-                  notary --help
-            - name: Sign and push the manifest
+            - name: Sign the manifest
               uses: sudo-bot/action-docker-sign@latest
               with:
                   image-ref: "docker.io/botsudo/action-doctum:latest"
-                  # Please use the repository key for the manifest or pull will not work
-                  private-key-id: "${{ secrets.DOCKER_PRIVATE_KEY_ID }}"
+                  private-key-id: "${{ vars.DOCKER_PRIVATE_KEY_ID }}"
+                  private-key-name: "${{ vars.DOCKER_PRIVATE_KEY_NAME }}"
                   private-key: ${{ secrets.DOCKER_PRIVATE_KEY }}
                   private-key-passphrase: ${{ secrets.DOCKER_PRIVATE_KEY_PASSPHRASE }}
                   sign-manifest: true
