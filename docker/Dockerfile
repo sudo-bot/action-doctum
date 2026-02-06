@@ -1,4 +1,4 @@
-FROM alpine:3.18
+FROM alpine:3.23
 
 ARG RELEASE_VERSION=5
 
@@ -11,9 +11,9 @@ COPY install.sh /install.sh
 
 RUN set -ex; \
     echo 'Installing PHP'; \
-    apk add --no-cache --update php81-cli php81-phar php81-tokenizer php81-iconv php81-mbstring git su-exec; \
+    apk add --no-cache --update php83-cli php83-phar php83-tokenizer php83-iconv php83-mbstring git su-exec; \
     apk add --no-cache --update --virtual .build-deps curl gnupg; \
-    ln -s /usr/bin/php81 /bin/php; \
+    ln -s /usr/bin/php83 /bin/php; \
     echo 'Adding GPG key'; \
     mkdir -p /doctum/.gnupg; \
     curl -s -o /doctum/public-key.asc https://williamdes.eu/public-key.asc; \
