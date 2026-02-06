@@ -8,6 +8,9 @@ on:
         tags:
             - "v5"
 
+env:
+    RELEASE_TAG: v5
+
 jobs:
     push_to_registry:
         name: Push Docker image to Docker hub
@@ -30,14 +33,14 @@ jobs:
             - name: Build action image
               run: make docker-build
               env:
-                  IMAGE_TAG: "docker.io/botsudo/action-doctum:latest"
+                  IMAGE_TAG: "docker.io/botsudo/action-doctum:${{ env.RELEASE_TAG }}"
                   PLATFORM: "linux/amd64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6,linux/arm64/v8,linux/riscv64"
                   ACTION: push
 
             - name: Sign the manifest
               uses: sudo-bot/action-docker-sign@latest
               with:
-                  image-ref: "docker.io/botsudo/action-doctum:latest"
+                  image-ref: "docker.io/botsudo/action-doctum:${{ env.RELEASE_TAG }}"
                   private-key-id: "${{ vars.DOCKER_PRIVATE_KEY_ID }}"
                   private-key-name: "${{ vars.DOCKER_PRIVATE_KEY_NAME }}"
                   private-key: ${{ secrets.DOCKER_PRIVATE_KEY }}
