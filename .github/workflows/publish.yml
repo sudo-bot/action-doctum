@@ -14,22 +14,33 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout the repository
-              uses: actions/checkout@v4
+              uses: actions/checkout@v6
             - name: Login to DockerHub
-              uses: docker/login-action@v2
+              uses: docker/login-action@v3
               with:
                   registry: docker.io
                   username: ${{ secrets.DOCKER_REPOSITORY_LOGIN }}
                   password: ${{ secrets.DOCKER_REPOSITORY_PASSWORD }}
             # https://github.com/docker/setup-qemu-action
             - name: Set up QEMU
-              uses: docker/setup-qemu-action@v2
+              uses: docker/setup-qemu-action@v3
             # https://github.com/docker/setup-buildx-action
             - name: Set up Docker Buildx
-              uses: docker/setup-buildx-action@v2
+              uses: docker/setup-buildx-action@v3
             - name: Build action image
               run: make docker-build
               env:
-                  IMAGE_TAG: "docker.io/botsudo/action-doctum:dev"
-                  PLATFORM: "linux/amd64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6"
+                  IMAGE_TAG: "docker.io/botsudo/action-doctum:latest"
+                  PLATFORM: "linux/amd64,linux/ppc64le,linux/s390x,linux/386,linux/arm/v7,linux/arm/v6,linux/arm64/v8,linux/riscv64"
                   ACTION: push
+
+            - name: Sign the manifest
+              uses: sudo-bot/action-docker-sign@latest
+              with:
+                  image-ref: "docker.io/botsudo/action-doctum:latest"
+                  private-key-id: "${{ vars.DOCKER_PRIVATE_KEY_ID }}"
+                  private-key-name: "${{ vars.DOCKER_PRIVATE_KEY_NAME }}"
+                  private-key: ${{ secrets.DOCKER_PRIVATE_KEY }}
+                  private-key-passphrase: ${{ secrets.DOCKER_PRIVATE_KEY_PASSPHRASE }}
+                  sign-manifest: true
+                  notary-auth: "${{ secrets.DOCKER_REPOSITORY_LOGIN }}:${{ secrets.DOCKER_REPOSITORY_PASSWORD }}"
